@@ -21,7 +21,6 @@ flowchart TD
                 direction TB
                 subgraph SubnetPubA["Public Subnet a (10.0.1.0/24)"]
                     WebEC2["Web Server (EC2)\nNginx (Port 80/443)\n[SG: web-sg]"]
-                    NAT["NAT Gateway + EIP\n(threetier-nat)"]
                 end
                 subgraph SubnetPubB["Public Subnet b (10.0.2.0/24)"]
                     PubSpare["Spare / High-Availability"]
@@ -54,7 +53,6 @@ flowchart TD
 
     %% Tier-to-Tier connections
     WebEC2 -->|"App Traffic: TCP 8080"| AppEC2
-    WebEC2 -.->|"SSH Bastion Hop: TCP 22"| AppEC2
     AppEC2 -->|"MySQL: TCP 3306"| RDS
 
     %% Outbound internet flow for updates
